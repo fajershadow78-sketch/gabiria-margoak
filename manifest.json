@@ -1,0 +1,13 @@
+{
+  "name": "Gabiria Margoak",
+  "short_name": "Gabiria Margoak",
+  "start_url": "/gabiria-margoak/",
+  "scope": "/gabiria-margoak/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "dir": "ltr",
+  "orientation": "any",
+  "description": "Pintura y reformas en Euskadi - Gabiria Margoak"
+}
+
