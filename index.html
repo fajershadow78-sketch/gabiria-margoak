@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabiria Margoak - Pintura eta Etxe Berriztapenak Euskadin</title>
+    <title>Gabiria Margoak - Pintura eta Etxe Berriztapenak</title>
+    <link rel="manifest" href="/gabiria-margoak/manifest.json">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -31,305 +32,121 @@
         html {
             scroll-behavior: smooth;
         }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans pb-24 min-h-screen">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-basqueRed selection:text-white">
 
-    <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md">
-        <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <!-- Basque Flag Badge -->
-                <div class="flex space-x-1">
-                    <span class="w-2.5 h-6 bg-basqueRed rounded-sm"></span>
-                    <span class="w-2.5 h-6 bg-basqueGreen rounded-sm"></span>
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-basqueRed to-red-700 flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                        GM
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-gray-900 block leading-none">GABIRIA</span>
+                        <span class="text-xs font-semibold text-basqueRed tracking-wider uppercase">Margoak</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-gray-600 text-sm">
+                    <a href="#hasiera" class="hover:text-basqueRed transition-colors">Hasiera</a>
+                    <a href="#zerbitzuak" class="hover:text-basqueRed transition-colors">Zerbitzuak</a>
+                    <a href="#zein-gara" class="hover:text-basqueRed transition-colors">Guri Buruz</a>
+                    <a href="#proiektuak" class="hover:text-basqueRed transition-colors">Proiektuak</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="tel:+34600000000" class="flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-basqueRed transition-colors">
+                        <i class="fa-solid fa-phone text-basqueGreen"></i>
+                        <span>Deitu Orain</span>
+                    </a>
+                    <a href="#kontaktua" class="bg-basqueRed hover:bg-red-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        Eskatu Aurrekontua
+                    </a>
                 </div>
-                <div>
-                    <h1 class="font-extrabold text-lg tracking-tight text-white leading-tight">Gabiria Margoak</h1>
-                    <p class="text-xs text-slate-400 font-medium">Euskadi Osoan • Basque Country</p>
-                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-basqueRed focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
             </div>
-            <!-- Direct Call Header Action -->
-            <a href="tel:+34632885029" class="bg-basqueRed hover:bg-red-700 text-white px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-md transition">
-                <i class="fa-solid fa-phone"></i>
-                <span>Deitu Orain</span>
-            </a>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#hasiera" class="block py-2 text-gray-600 font-medium hover:text-basqueRed">Hasiera</a>
+            <a href="#zerbitzuak" class="block py-2 text-gray-600 font-medium hover:text-basqueRed">Zerbitzuak</a>
+            <a href="#zein-gara" class="block py-2 text-gray-600 font-medium hover:text-basqueRed">Guri Buruz</a>
+            <a href="#proiektuak" class="block py-2 text-gray-600 font-medium hover:text-basqueRed">Proiektuak</a>
+            <div class="pt-4 border-t border-gray-100 flex flex-col gap-3">
+                <a href="tel:+34600000000" class="flex items-center justify-center gap-2 py-2.5 rounded-xl border border-gray-200 font-semibold text-gray-700">
+                    <i class="fa-solid fa-phone text-basqueGreen"></i>
+                    <span>Deitu Orain</span>
+                </a>
+                <a href="#kontaktua" class="text-center bg-basqueRed text-white font-semibold py-2.5 rounded-xl shadow-md">
+                    Eskatu Aurrekontua
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-md mx-auto px-4 pt-4 space-y-6">
-
-        <!-- Hero Banner -->
-        <section class="relative rounded-2xl overflow-hidden bg-slate-950 text-white shadow-xl border border-slate-800">
-            <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80" alt="Renovation Work" class="w-full h-56 object-cover opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent flex flex-col justify-end p-5">
-                <span class="inline-block px-2.5 py-1 bg-basqueGreen text-white text-[10px] font-bold uppercase tracking-wider rounded-md w-max mb-2">PROFESIONAL KUALIFIKATUAK</span>
-                <h2 class="text-2xl font-black leading-tight text-white">Pintura eta Etxe Berriztapenak Euskadin</h2>
-                <p class="text-xs text-slate-300 mt-1">Kalitate handiko pintura lana, azulejuak eta erreforma osoak. Eskatu zure aurrekontua konpromisorik gabe.</p>
-            </div>
-        </section>
-
-        <!-- Quick Info Badges -->
-        <div class="flex items-center justify-between bg-slate-800/80 p-3.5 rounded-xl border border-slate-700/60 shadow-sm text-xs font-medium text-slate-200">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-shield-halved text-basqueGreen text-base"></i>
-                <span>Bermedun Lana</span>
-            </div>
-            <div class="h-4 w-px bg-slate-700"></div>
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-bolt text-amber-400 text-base"></i>
-                <span>Erantzun Azkarra</span>
-            </div>
-            <div class="h-4 w-px bg-slate-700"></div>
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-medal text-basqueRed text-base"></i>
-                <span>Esperientzia Handia</span>
+    <!-- Hero Section -->
+    <section id="hasiera" class="relative bg-gradient-to-b from-gray-100 to-white pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-3 py-1.5 rounded-full text-xs font-semibold text-basqueRed">
+                        <span class="w-2 h-2 rounded-full bg-basqueGreen animate-pulse"></span>
+                        Euskadi Osoan Zerbitzua
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+                        Pintura eta Berriztapen <span class="text-transparent bg-clip-text bg-gradient-to-r from-basqueRed to-red-600">Profesionala</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 max-w-xl mx-auto md:mx-0 leading-relaxed">
+                        Zure etxea edo negozioa berritzeko kalitatezko lanak. Margolaritza, zoruak eta erreforma osoak berme guztiarekin.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
+                        <a href="#kontaktua" class="bg-basqueRed hover:bg-red-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center">
+                            Doako Aurrekontua
+                        </a>
+                        <a href="#zerbitzuak" class="bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all duration-300 text-center">
+                            Gure Zerbitzuak
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="relative mx-auto max-w-md md:max-w-none rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80" alt="Pintura lana" class="w-full h-[400px] object-cover">
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- Service Posters Section -->
-        <section class="space-y-3">
-            <div class="flex justify-between items-end">
-                <div>
-                    <h3 class="text-lg font-bold text-white">Gure Zerbitzuak</h3>
-                    <p class="text-xs text-slate-400">Sakatu zerbitzu batean aurrekontua eskatzeko</p>
+    <!-- Footer -->
+    <footer class="bg-basqueDark text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex justify-center items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-basqueRed flex items-center justify-center text-white font-bold text-sm">
+                    GM
                 </div>
-                <span class="text-xs text-basqueGreen font-semibold">4 Atal</span>
+                <span class="text-lg font-bold text-white tracking-tight">GABIRIA MARGOAK</span>
             </div>
-
-            <div class="grid grid-cols-1 gap-4">
-                
-                <!-- Poster 1: Painting -->
-                <div onclick="openQuoteModal('Barruko eta Kanpoko Pintura')" class="group cursor-pointer bg-slate-800 rounded-2xl border border-slate-700/80 shadow-md overflow-hidden hover:border-basqueGreen transition">
-                    <div class="relative h-44 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80" alt="Pintura Zerbitzua" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <div class="absolute top-3 right-3 bg-basqueGreen text-white px-2.5 py-1 rounded-full text-[11px] font-bold shadow-sm">
-                            Eskatuena
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h4 class="font-bold text-white text-base">Barruko eta Kanpoko Pintura</h4>
-                        <p class="text-xs text-slate-300 mt-1">Hormak, sabaia, gotele kentzea, fatxada Babesa eta dekorazio margo lanak.</p>
-                        <div class="mt-3 flex items-center justify-between pt-2 border-t border-slate-700">
-                            <span class="text-xs font-semibold text-basqueGreen flex items-center gap-1">
-                                <i class="fa-solid fa-circle-check"></i> Aurrekontu Dohainik
-                            </span>
-                            <span class="text-xs font-bold text-white flex items-center gap-1 group-hover:translate-x-1 transition">
-                                Informazioa Eskatu <i class="fa-solid fa-arrow-right"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Poster 2: Complete Renewal -->
-                <div onclick="openQuoteModal('Etxe eta Sukalde Berriztapenak')" class="group cursor-pointer bg-slate-800 rounded-2xl border border-slate-700/80 shadow-md overflow-hidden hover:border-basqueGreen transition">
-                    <div class="relative h-44 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Erreforma Zerbitzua" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-                    <div class="p-4">
-                        <h4 class="font-bold text-white text-base">Etxe eta Sukalde Berriztapenak</h4>
-                        <p class="text-xs text-slate-300 mt-1">Etxe osoko erreformak, bainugelak, sukalde berriak eta igeltserotza lanak.</p>
-                        <div class="mt-3 flex items-center justify-between pt-2 border-t border-slate-700">
-                            <span class="text-xs font-semibold text-basqueGreen flex items-center gap-1">
-                                <i class="fa-solid fa-circle-check"></i> Lan Osoa
-                            </span>
-                            <span class="text-xs font-bold text-white flex items-center gap-1 group-hover:translate-x-1 transition">
-                                Informazioa Eskatu <i class="fa-solid fa-arrow-right"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Poster 3: Flooring & Tiling -->
-                <div onclick="openQuoteModal('Azulejuak eta Lurgaiak')" class="group cursor-pointer bg-slate-800 rounded-2xl border border-slate-700/80 shadow-md overflow-hidden hover:border-basqueGreen transition">
-                    <div class="relative h-44 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="Azulejuak" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-                    <div class="p-4">
-                        <h4 class="font-bold text-white text-base">Azulejuak eta Lurgaiak</h4>
-                        <p class="text-xs text-slate-300 mt-1">Zoru laminatuak, zeramikazko azulejuak, viniloa eta sukalde zein bainugela estaltzea.</p>
-                        <div class="mt-3 flex items-center justify-between pt-2 border-t border-slate-700">
-                            <span class="text-xs font-semibold text-basqueGreen flex items-center gap-1">
-                                <i class="fa-solid fa-[#009B48]"></i> Zehaztasun Handia
-                            </span>
-                            <span class="text-xs font-bold text-white flex items-center gap-1 group-hover:translate-x-1 transition">
-                                Informazioa Eskatu <i class="fa-solid fa-arrow-right"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Poster 4: Roofs & Facades -->
-                <div onclick="openQuoteModal('Tejatuak eta Fatxadak')" class="group cursor-pointer bg-slate-800 rounded-2xl border border-slate-700/80 shadow-md overflow-hidden hover:border-basqueGreen transition">
-                    <div class="relative h-44 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80" alt="Fatxada Zerbitzua" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-                    <div class="p-4">
-                        <h4 class="font-bold text-white text-base">Tejatuak eta Fatxadak</h4>
-                        <p class="text-xs text-slate-300 mt-1">Fatxada garbiketa eta pintura, hezetasun babesa eta teilatu konponketak.</p>
-                        <div class="mt-3 flex items-center justify-between pt-2 border-t border-slate-700">
-                            <span class="text-xs font-semibold text-basqueGreen flex items-center gap-1">
-                                <i class="fa-solid fa-circle-check"></i> Babes Handia
-                            </span>
-                            <span class="text-xs font-bold text-white flex items-center gap-1 group-hover:translate-x-1 transition">
-                                Informazioa Eskatu <i class="fa-solid fa-arrow-right"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Project Portfolio Carousel -->
-        <section class="space-y-3 pt-2">
-            <div>
-                <h3 class="text-lg font-bold text-white">Azken Lanak Euskadin</h3>
-                <p class="text-xs text-slate-400">Bizkaia, Gipuzkoa eta Araban egindako lanak</p>
-            </div>
-
-            <div class="flex space-x-4 overflow-x-auto hide-scrollbar pb-2 pt-1">
-                <div class="min-w-[260px] bg-slate-800 rounded-xl border border-slate-700 p-3 shadow-sm flex-shrink-0">
-                    <div class="relative h-36 rounded-lg overflow-hidden mb-2">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Bilbo" class="w-full h-full object-cover">
-                        <span class="absolute bottom-2 left-2 bg-slate-950/80 text-white text-[10px] px-2 py-0.5 rounded backdrop-blur-sm">Bilbo (Bizkaia)</span>
-                    </div>
-                    <h5 class="font-bold text-xs text-white">Egongela eta Fatxada Pintura</h5>
-                    <p class="text-[11px] text-slate-400 mt-0.5">Iraupena: 4 Egun • Pintura Osoa</p>
-                </div>
-
-                <div class="min-w-[260px] bg-slate-800 rounded-xl border border-slate-700 p-3 shadow-sm flex-shrink-0">
-                    <div class="relative h-36 rounded-lg overflow-hidden mb-2">
-                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" alt="Donostia" class="w-full h-full object-cover">
-                        <span class="absolute bottom-2 left-2 bg-slate-950/80 text-white text-[10px] px-2 py-0.5 rounded backdrop-blur-sm">Donostia (Gipuzkoa)</span>
-                    </div>
-                    <h5 class="font-bold text-xs text-white">Sukalde eta Azuleju Berriztapena</h5>
-                    <p class="text-[11px] text-slate-400 mt-0.5">Iraupena: 6 Egun • Sukalde Berria</p>
-                </div>
-
-                <div class="min-w-[260px] bg-slate-800 rounded-xl border border-slate-700 p-3 shadow-sm flex-shrink-0">
-                    <div class="relative h-36 rounded-lg overflow-hidden mb-2">
-                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" alt="Gasteiz" class="w-full h-full object-cover">
-                        <span class="absolute bottom-2 left-2 bg-slate-950/80 text-white text-[10px] px-2 py-0.5 rounded backdrop-blur-sm">Vitoria-Gasteiz (Araba)</span>
-                    </div>
-                    <h5 class="font-bold text-xs text-white">Gotele Kentzea eta Hormak Leuntzea</h5>
-                    <p class="text-[11px] text-slate-400 mt-0.5">Iraupena: 3 Egun • Horma Leunak</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Service Coverage Region -->
-        <section class="bg-slate-800 rounded-2xl p-4 border border-slate-700 shadow-sm space-y-3">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-location-dot text-basqueRed text-lg"></i>
-                <div>
-                    <h3 class="font-bold text-white text-sm">Euskal Herri Osoan Lan Egiten Dugu</h3>
-                    <p class="text-xs text-slate-400">Euskadiko herri eta hiri guztietan zerbitzua</p>
-                </div>
-            </div>
-            
-            <div class="flex flex-wrap gap-1.5">
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">Bilbo</span>
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">Donostia</span>
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">Vitoria-Gasteiz</span>
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">Barakaldo</span>
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">Getxo</span>
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">Irun</span>
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">Portugalete</span>
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">Eibar</span>
-                <span class="px-2.5 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg">+ Inguruko Herriak</span>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Bottom Sticky Contact Bar -->
-    <div class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 p-3 z-50 shadow-2xl">
-        <div class="max-w-md mx-auto grid grid-cols-2 gap-3">
-            <!-- Direct Phone Call (+34 632 88 50 29) -->
-            <a href="tel:+34632885029" class="flex items-center justify-center gap-2 bg-basqueRed hover:bg-red-700 text-white font-bold text-sm py-3 px-4 rounded-xl shadow active:scale-95 transition">
-                <i class="fa-solid fa-phone"></i>
-                <span>Deitu Orain</span>
-            </a>
-            
-            <!-- Direct WhatsApp (+34 632 88 50 29) -->
-            <a id="whatsappBtn" href="https://wa.me/34632885029?text=Kaixo!%20Gabiria%20Margoak-ekin%20hitz%20egin%20nahi%20dut%20aurrekontu%20batekiko." target="_blank" class="flex items-center justify-center gap-2 bg-basqueGreen hover:bg-emerald-700 text-white font-bold text-sm py-3 px-4 rounded-xl shadow active:scale-95 transition">
-                <i class="fa-brands fa-whatsapp text-lg"></i>
-                <span>WhatsApp</span>
-            </a>
+            <p class="text-sm text-gray-500">© 2026 Gabiria Margoak. Eskubide guztiak erreserbatuta.</p>
         </div>
-    </div>
+    </footer>
 
-    <!-- Quick Service Quote Modal -->
-    <div id="quoteModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-4">
-        <div class="bg-slate-800 rounded-2xl max-w-sm w-full p-5 space-y-4 shadow-2xl border border-slate-700">
-            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
-                <h4 id="modalTitle" class="font-bold text-white text-base">Aukeratu Aurrekontu Xehetasunak</h4>
-                <button onclick="closeQuoteModal()" class="text-slate-400 hover:text-white text-lg">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <p class="text-xs text-slate-300">Aukeratu zure herria WhatsApp bidez mezu bat bidaltzeko (+34 632 88 50 29):</p>
-
-            <div class="space-y-2">
-                <label class="text-xs font-bold text-slate-200">Aukeratu Lekua:</label>
-                <select id="citySelect" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-medium focus:ring-2 focus:ring-basqueGreen outline-none">
-                    <option value="Bilbo / Bizkaia">Bilbo / Bizkaia</option>
-                    <option value="Donostia / Gipuzkoa">Donostia / Gipuzkoa</option>
-                    <option value="Vitoria-Gasteiz / Araba">Vitoria-Gasteiz / Araba</option>
-                    <option value="Euskadiko Beste Herri Bat">Beste Herri Bat</option>
-                </select>
-            </div>
-
-            <div class="space-y-2">
-                <label class="text-xs font-bold text-slate-200">Lanaren Xehetasunak (Nahi izanez gero):</label>
-                <textarea id="projectNotes" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none focus:ring-2 focus:ring-basqueGreen" placeholder="Adibidez: 3 gelako pisua margotu nahi dut..."></textarea>
-            </div>
-
-            <button onclick="sendCustomWhatsApp()" class="w-full bg-basqueGreen hover:bg-emerald-700 text-white font-bold text-sm py-3 rounded-xl flex items-center justify-center gap-2 shadow transition">
-                <i class="fa-brands fa-whatsapp text-lg"></i>
-                <span>WhatsApp Bidez Bidali</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Application Script Logic -->
     <script>
-        let currentSelectedService = 'Berriztapen Orokorra';
-        const businessPhone = "34632885029";
-
-        function openQuoteModal(serviceName) {
-            currentSelectedService = serviceName;
-            document.getElementById('modalTitle').innerText = serviceName;
-            document.getElementById('quoteModal').classList.remove('hidden');
-        }
-
-        function closeQuoteModal() {
-            document.getElementById('quoteModal').classList.add('hidden');
-        }
-
-        function sendCustomWhatsApp() {
-            const city = document.getElementById('citySelect').value;
-            const notes = document.getElementById('projectNotes').value;
-            
-            let text = `Kaixo Gabiria Margoak! *${currentSelectedService}* zerbitzuari buruzko informazioa nahi dut non eta *${city}* lekuan.`;
-            if (notes.trim() !== '') {
-                text += `\nLanaren xehetasunak: ${notes}`;
-            }
-
-            const encodedText = encodeURIComponent(text);
-            window.open(`https://wa.me/${businessPhone}?text=${encodedText}`, '_blank');
-            closeQuoteModal();
-        }
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>
